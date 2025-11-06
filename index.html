@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Francis Padinit | Portfolio</title>
+<style>
+/* -------------------- RESET & BASE -------------------- */
+*{margin:0;padding:0;box-sizing:border-box;font-family:"Poppins",sans-serif;text-decoration:none;}
+body{
+  background:radial-gradient(circle at top left,#140020,#070010 50%,#000);
+  color:#e4dfff;overflow-x:hidden;scroll-behavior:smooth;position:relative;min-height:100vh;
+}
+
+/* animated background */
+body::before{
+  content:"";position:fixed;inset:0;
+  background:linear-gradient(120deg,#1a0129,#0b0017,#000,#1a0129);
+  background-size:300% 300%;animation:gradientMove 18s ease infinite;z-index:-3;
+}
+@keyframes gradientMove{
+  0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}
+}
+
+/* particles */
+.particle{position:fixed;border-radius:50%;opacity:.2;animation:floatUp linear infinite;z-index:-2;}
+@keyframes floatUp{from{transform:translateY(0);opacity:.3}to{transform:translateY(-120vh);opacity:0}}
+
+/* header */
+header{
+  position:sticky;top:0;background:rgba(20,0,40,.45);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(255,255,255,.05);display:flex;justify-content:space-between;align-items:center;
+  padding:18px 10%;z-index:1000;animation:fadeDown .9s ease both;
+}
+header h1{font-size:1.7rem;color:#cdbdff;text-shadow:0 0 18px #b26cff,0 0 30px #6f42c1;}
+nav ul{list-style:none;display:flex;gap:24px;}
+nav a{color:#cfc9ff;font-weight:600;transition:.25s;text-decoration:none;}
+nav a:hover{color:#b26cff;text-shadow:0 0 14px #b26cff;text-decoration:none;}
+
+/* hero */
+.hero{
+  min-height:100vh;display:flex;align-items:center;justify-content:space-between;padding:8vh 10%;gap:60px;position:relative;
+}
+.hero-content{
+  flex:1;background:rgba(255,255,255,.03);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  border:1px solid rgba(255,255,255,.08);padding:40px;border-radius:20px;
+  box-shadow:0 0 50px rgba(178,108,255,.25);animation:fadeUp 1s ease both;
+}
+.hero-content h2{
+  font-size:3rem;background:linear-gradient(135deg,#b26cff,#7030a0);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  text-shadow:0 0 18px rgba(178,108,255,.4);
+  transition: all 0.6s ease;
+}
+.hero-content h2:hover{
+  text-shadow:0 0 30px #b26cff, 0 0 80px #9b5de5;
+  transform: scale(1.08);
+  filter: drop-shadow(0 0 20px #b26cff);
+}
+.hero-content p{margin-top:12px;line-height:1.7;color:#d9d4ff;font-size:1.05rem;}
+.hero-content button{
+  margin-top:28px;background:linear-gradient(135deg,#b26cff,#6f42c1);color:#fff;border:none;
+  padding:12px 26px;border-radius:999px;cursor:pointer;font-weight:700;
+  box-shadow:0 0 25px rgba(178,108,255,.3);transition:.28s;
+}
+.hero-content button:hover{transform:scale(1.08);box-shadow:0 0 45px rgba(178,108,255,.7);}
+
+/* hero image */
+.hero .portrait{
+  width:420px;max-width:42vw;flex:0 0 420px;display:flex;justify-content:center;align-items:center;
+  animation:fadeRight 1.2s ease forwards .25s;
+}
+.hero .portrait img{
+  width:100%;border-radius:50%;border:3px solid rgba(255,255,255,.06);
+  box-shadow:0 0 60px rgba(178,108,255,.28);transition:transform .6s ease, box-shadow .6s, filter .6s;
+  transform:scale(1);display:block;
+}
+.hero .portrait img:hover{
+  transform:scale(1.15) rotate(5deg);
+  box-shadow:0 0 90px rgba(178,108,255,.6),0 0 50px rgba(178,108,255,.45);
+  filter:hue-rotate(20deg);
+}
+
+/* sections */
+section{
+  padding:90px 10%;text-align:center;position:relative;z-index:1;
+}
+section h2{
+  font-size:2.4rem;background:linear-gradient(135deg,#b26cff,#6f42c1);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  margin-bottom:22px;text-decoration:none;
+}
+section p{color:#cfc6ff;max-width:900px;margin:0 auto;line-height:1.8;}
+
+/* projects */
+.projects{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:26px;margin-top:36px;
+  opacity:0;transform:translateY(30px);transition:opacity .8s ease, transform .8s ease;
+}
+.projects.in-view{opacity:1;transform:translateY(0);}
+.project-card{
+  background:rgba(255,255,255,.03);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:22px;
+  transition:all .4s ease-in-out;
+}
+.project-card h3{color:#b26cff;margin-bottom:10px;}
+.project-card:hover{
+  transform:translateY(-8px) scale(1.05);
+  box-shadow:0 0 45px rgba(178,108,255,.55);
+  border-color:#b26cff;
+}
+
+/* contact buttons */
+.contact a{
+  display:inline-block;margin:12px;padding:12px 22px;border-radius:28px;
+  background:linear-gradient(135deg,#b26cff,#7030a0);color:#fff;font-weight:700;
+  box-shadow:0 0 25px rgba(178,108,255,.25);transition:.25s;
+  text-decoration:none;
+}
+.contact a:hover{
+  transform:scale(1.08);
+  box-shadow:0 0 40px rgba(178,108,255,.7);
+}
+
+/* footer */
+footer{
+  padding:24px;text-align:center;color:#bcaaff;border-top:1px solid rgba(255,255,255,.04);
+}
+
+/* animations */
+@keyframes fadeDown{from{opacity:0;transform:translateY(-18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(50px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeRight{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:translateX(0)}}
+
+/* scroll animation */
+.scroll-animate{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.9,.2,1);}
+.scroll-animate.in-view{opacity:1;transform:translateY(0);}
+
+/* responsive */
+@media(max-width:980px){
+  header{padding:12px 6%;}
+  .hero{flex-direction:column;padding:6vh 6%;gap:28px;}
+  .hero .portrait{max-width:320px;width:320px;}
+  .hero-content h2{font-size:2.2rem;}
+}
+@media(max-width:520px){
+  nav ul{gap:12px;font-size:.95rem;}
+  section{padding:64px 6%;}
+}
+
+/* brighter cool stickers */
+.sticker{
+  position:fixed;
+  width:80px;height:80px;
+  opacity:0.6;
+  filter:drop-shadow(0 0 18px rgba(178,108,255,0.9)) brightness(1.9);
+  z-index:0;
+  animation:floatSticker 14s infinite ease-in-out alternate;
+  transition:filter .4s ease;
+}
+.sticker:hover{
+  opacity:1;
+  filter:drop-shadow(0 0 26px rgba(178,108,255,1)) brightness(2.3);
+}
+@keyframes floatSticker{
+  0%{transform:translateY(0) rotate(0deg);}
+  50%{transform:translateY(-30px) rotate(10deg);}
+  100%{transform:translateY(0) rotate(-10deg);}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Francis Padinit</h1>
+  <nav>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-content">
+    <h2>Hello, I'm Francis 👋</h2>
+    <p>Just a typical dude eager to learn more about the world of tech.</p>
+    <button onclick="location.href='#projects'">View My Work</button>
+  </div>
+  <div class="portrait">
+    <img src="francis.jpg" alt="Francis Photo"
+    onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1603415526960-f7e0328c63b1?w=900';">
+  </div>
+</section>
+
+<section id="about" class="scroll-animate">
+  <h2>About Me</h2>
+  <p>Grade 12 ICT student | Coffee ☕ | Games🎮 | Coding 💻
+I create, I code, I play.</p>
+</section>
+
+<section id="projects" class="scroll-animate">
+  <h2>My Projects</h2>
+  <div class="projects scroll-animate">
+    <div class="project-card">
+      <h3>💻 Personal Portfolio</h3>
+      <p>A personal portfolio I built to showcase my projects and track my growth as a student and aspiring developer.</p>
+    </div>
+    <div class="project-card">
+      <h3>🎮 Mini Game GUI</h3>
+      <p>Python + Tkinter project, a simple game I built with Python and Tkinter while learning how GUI works..</p>
+    </div>
+    <div class="project-card">
+      <h3>🌐Websites</h3>
+      <p>Some basic websites I built to practice HTML and CSS while expressing my creativity.</p>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="scroll-animate contact">
+  <h2>Interested?</h2>
+  <p>Get in Touch.</p>
+  <a href="https://discord.com/" target="_blank">💻 Discord</a>
+  <a href="https://facebook.com/" target="_blank">💬 Facebook</a>
+  <a href="https://roblox.com/" target="_blank">🎮 Roblox</a>
+</section>
+
+<footer>
+  <p>© 2025 Francis Padinit | Crafted out of boredom 💀💀💀</p>
+</footer>
+
+<script>
+/* floating particles */
+(function createParticles(){
+  const count=20;
+  for(let i=0;i<count;i++){
+    const p=document.createElement('div');
+    p.className='particle';
+    const size=Math.random()*6+2;
+    p.style.width=size+'px';
+    p.style.height=size+'px';
+    p.style.left=(Math.random()*100)+'vw';
+    p.style.top=(Math.random()*100)+'vh';
+    p.style.background=Math.random()>0.5?'#b26cff':'#7030a0';
+    p.style.animationDuration=(Math.random()*18+12)+'s';
+    document.body.appendChild(p);
+  }
+})();
+
+/* scroll reveal that re-triggers */
+(function scrollReveal(){
+  const observer=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add('in-view');
+      } else {
+        entry.target.classList.remove('in-view');
+      }
+    });
+  },{threshold:0.15});
+  document.querySelectorAll('.scroll-animate, .projects').forEach(el=>observer.observe(el));
+})();
+
+/* floating stickers */
+(function addStickers(){
+  const stickers=[,"🤖","☕","💻","🎮","🚀","💀","🎧"];
+  for(let i=0;i<stickers.length;i++){
+    const s=document.createElement('div');
+    s.className='sticker';
+    s.textContent=stickers[i];
+    s.style.left=Math.random()*100+'vw';
+    s.style.top=Math.random()*100+'vh';
+    s.style.fontSize=(Math.random()*30+30)+'px';
+    s.style.animationDuration=(Math.random()*10+10)+'s';
+    document.body.appendChild(s);
+  }
+})();
+</script>
+
+</body>
+</html>
